@@ -6,7 +6,6 @@ Flask-Minify==0.37
 flask-restx
 Flask-SQLAlchemy
 Flask-WTF
-mysql-server
 pyjwt
 mysqlclient==2.1.1
 Flask-WTF==1.0.1
