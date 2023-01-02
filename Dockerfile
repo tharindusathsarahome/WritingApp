@@ -10,7 +10,9 @@ COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY . app/
+WORKDIR /app
 
 # gunicorn
-CMD ["gunicorn", "--config", "gunicorn-cfg.py", "run:app"]
+# CMD ["gunicorn", "--config", "gunicorn-cfg.py", "run:app"]
+CMD exec gunicorn --bind :8080 --workers 1 --threads 8 app:app
