@@ -1,0 +1,312 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Tool {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+{% include 'includes/preloader.html' %}
+
+<style>
+    .tool-box {
+        margin-top: 5%;
+    }
+
+    .tool-box-panl {
+        background-color: rgba(252, 253, 254, 0.568);
+        border-radius: 5%;
+        height: 100%;
+    }
+
+    .output {
+        background-color: rgba(255, 255, 255, 0.534);
+        display: block;
+        width: 100%;
+        margin: 2%;
+        border-radius: 2%;
+
+
+    }
+
+    .txtdata p {
+        word-wrap: break-word;
+
+    }
+    .iconBNT svg{
+        margin-top:1%;
+        margin-left: 2%;
+        cursor: pointer;
+    }
+.output{
+    padding: 5%;
+   
+}
+
+.overflowData{
+    overflow: auto;
+    max-height:500px ;
+}
+
+.inf{
+    margin-bottom: 3%;
+    padding-left: 5%;
+    padding-bottom: 3%;
+    max-height:800px ;
+}
+
+    .box-pont {
+        background-color: #f5f8ff;
+    }
+
+    .tab-pane {
+        opacity: 1;
+        background-color: #f5f8ffaf;
+    }
+
+    .box-item {
+        background-color: #f5f8ffa8;
+        border-radius: 4%;
+    }
+
+    .count{
+        padding:2%;
+    }
+  
+    @media (max-width: 575.98px) {
+        .box-item {
+            display: none;
+
+            margin-left: 20%;
+
+        }
+
+        .tool-name {
+            margin-left: 5%;
+        }
+
+
+
+    }
+</style>
+
+
+<div class="container-fluid">
+    <section class="tool-box">
+        <div class="row">
+            <div class="col-5 tool-box-panl">
+                <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <details typeof="Item" class="nav-link active" id="Features-tab" data-bs-toggle="tab"
+                            data-bs-target="#Features-tab-pane" role="tab" aria-controls="Features-tab-pane"
+                            aria-selected="true">
+                            <meta property="open" aria-label="Open" class="mv-empty" datatype="boolean">
+                            <summary property="title" typeof="Item">
+                                <img class="icon" src="/static/assets/img/illustrations/undraw_bookmarks_re_mq1u.svg"
+                                    alt="Icon">
+                                <span property="text" aria-label="Text" class="">Features</span>
+                            </summary>
+                        </details>
+                    </li>
+                    <li class="nav-item">
+                        <details class="nav-link" id="Setting-tab" data-bs-toggle="tab"
+                            data-bs-target="#Setting-tab-pane" type="button" role="tab" aria-controls="Setting-tab-pane"
+                            aria-selected="false">
+                            <meta property="open" aria-label="Open" class="mv-empty" datatype="boolean">
+                            <summary property="title" typeof="Item">
+                                <img class="icon" src="/static/assets/img/illustrations/undraw_settings_re_b08x.svg"
+                                    alt="Icon">
+                                <span property="text" aria-label="Text" class="">Setting</span>
+                            </summary>
+                        </details>
+                    </li>
+                </ul>
+                <form method="post" action="" class="box-pont">
+                    <div class="tab-content" id="myTabContent">
+                        <section class="feature tab-pane fade show active" id="Features-tab-pane" role="tabpanel"
+                            aria-labelledby="Features-tab" tabindex="0">
+                            {{ form.hidden_tag() }}
+                            <!-- Form -->
+                            {% for tooldataf in ToolData['tool'][0] %}
+                            <div class="form-group mb-4 ">
+                                <label for="email">{{ToolData['tool'][0][tooldataf][0]}}</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1"><span
+                                            class="{{ToolData['tool'][1][tooldataf]}}"></span></span>
+                                    {{
+
+                                    classMarch(form,tooldataf)(class="form-control",placeholder =ToolData['tool'][0][tooldataf][1])
+
+                                    }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!-- End of Form -->
+                            
+                            <div class="d-grid">
+                                <button type="submit" name="login" onclick="loaderPopa()" class="btn btn-primary">Generator</button>
+                            </div>
+                        </section>
+                        <section class="feature tab-pane" id="Setting-tab-pane" role="tabpanel"
+                            aria-labelledby="Setting-tab" tabindex="0">
+                            {{ form.hidden_tag() }}
+                            <!-- Form -->
+                            <div class="form-group mb-4 ">
+                                <label for="Creativity">Creativity</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1"><span
+                                            class="fas fa-user-cog"></span></span>
+                                    {{ form.selectCreativity(class="form-control",value="High")}}
+                                </div>
+                            </div>
+                            <!-- End of Form -->
+                            <div class="form-group">
+                                <!-- Form -->
+                                <div class="form-group mb-4">
+                                    <label for="password">Outputs:</label>
+                                    <div class="input-group">
+                                        {{ form.rang1(min="1",max="10",value="1")}}
+                                        <div class="count" id="count">3</div>
+                                    </div>
+                                </div>
+                                <!-- End of Form -->
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                                </div>
+                            </div>
+                            <div class="form-group mb-4 ">
+                                <label for="Creativity">Tone of voice</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1"><span
+                                            class="fas fa-id-badge"></span></span>
+                                    {{ form.selectToneOfVoice(class="form-control",value="Professional")}}
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-4 ">
+                                <label for="Creativity">Target audience</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1"><span
+                                            class="fas fa-users"></span></span>
+                                    {{ form.txt6(class="form-control",value=" ")}}
+                                </div>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" name="login" class="btn btn-primary" onclick="loaderPopa()">Generator</button>
+                            </div>
+                        </section>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="inf col-7">
+             
+                <!---<div class="loader">
+                    <div>
+                    <ul>
+                        <li>
+                        <svg viewBox="0 0 90 120" fill="currentColor">
+                            <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                        </svg>
+                        </li>
+                        <li>
+                        <svg viewBox="0 0 90 120" fill="currentColor">
+                            <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                        </svg>
+                        </li>
+                        <li>
+                        <svg viewBox="0 0 90 120" fill="currentColor">
+                            <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                        </svg>
+                        </li>
+                        <li>
+                        <svg viewBox="0 0 90 120" fill="currentColor">
+                            <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                        </svg>
+                        </li>
+                        <li>
+                        <svg viewBox="0 0 90 120" fill="currentColor">
+                            <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                        </svg>
+                        </li>
+                        <li>
+                        <svg viewBox="0 0 90 120" fill="currentColor">
+                            <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                        </svg>
+                        </li>
+                    </ul>
+                    </div><span>Loading</span>
+                </div> -->
+              
+                <br>
+                {% if OutPut == False %}
+                <h2 class="tool-name">{{ToolData['titel']}}</h2>
+
+                <div class="inf-text">
+                    {% for p in ToolData['dis'] %}
+                    <p style="color:black;width:100%;">{{p}}</p>
+                    {% endfor %}
+                </div>
+                <img id="baner-icon" src="{{ToolData['img']}}" alt="monitoring">
+           {% endif %}
+                {% if OutPut %}
+                <div class="container ">
+                    <div class="row ">
+                        
+                        <section class="coppy overflowData">
+                            {% for data in OutPut %}
+                            <div class="output">
+                                <div class="head">
+                                    <div class="iconBNT">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                            class="bi bi-clipboard" viewBox="0 0 16 16">
+                                            <path
+                                                d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                                            <path
+                                                d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="txtdata">
+                                    <p>
+                                        {% autoescape false %}
+                                            {{OutPut[data][1]}}
+                                        {% endautoescape %}
+                                       
+                                    </p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </section>
+                       
+                    </div>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+</div>
+</div>
+</section>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</div>
+
+
+{% include 'includes/footer-about.html' %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

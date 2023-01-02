@@ -1,0 +1,235 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Home {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+{% include 'includes/preloader.html' %}
+
+
+
+
+
+
+<!-- Hero -->
+
+
+<section class="banner">
+    <div class="container">
+        <div class="banner-text">
+            <h1> Writing Tool </h1>
+            <p><strong>  Looking for a top-quality AI writing tool?.</strong>  Look no further than ours! Our AI writing tool is designed for all users, whether you’re a beginner or an expert. Simply enter your text and our AI writing tool will get to work, delivering top-quality results within seconds.</p>
+            <a href="#myTab"><button>Start</button></a>
+        </div>
+    </div>
+    <img class="banner-image" style="height:90%; margin-top: 2%;" src="/static/assets/img/illustrations/undraw_web_devices_re_m8sc.svg" alt="monitoring">
+</section>
+
+
+
+    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+        
+        <li class="nav-item">
+                <details  typeof="Item" class="nav-link active" id="Content-tab" data-bs-toggle="tab" data-bs-target="#Content-tab-pane" role="tab"
+                    aria-controls="Content-tab-pane" aria-selected="true">
+                    <meta property="open" aria-label="Open" class="mv-empty" datatype="boolean">
+                    <summary property="title" typeof="Item">
+                        <img class="icon" src="/static/assets/img/illustrations/undraw_content_creator_re_pt5b.svg"
+                            alt="Icon">
+                          
+                        <span property="text" aria-label="Text" class="">Content Writing</span>
+                    </summary>
+        
+                </details>
+        
+            </li>
+        <li class="nav-item">
+                <details  class="nav-link" id="WebCopy-tab" data-bs-toggle="tab" data-bs-target="#WebCopy-tab-pane" type="button"
+                    role="tab" aria-controls="WebCopy-tab-pane" aria-selected="false">
+                    <meta property="open" aria-label="Open" class="mv-empty" datatype="boolean">
+                    <summary property="title" typeof="Item">
+                        <img class="icon" src="/static/assets/img/illustrations/undraw_online_stats_0g94.svg"
+                            alt="Icon">
+                        <span property="text" aria-label="Text" class="">Documents</span>
+                    </summary>
+                </details>
+        </li>
+
+        <li class="nav-item">
+            <details  class="nav-link" id="Marketing-tab" data-bs-toggle="tab" data-bs-target="#Marketing-tab-pane" type="button"
+            role="tab" aria-controls="Marketing-tab-pane" aria-selected="false">
+                <meta property="open" aria-label="Open" class="mv-empty" datatype="boolean">
+                <summary property="title" typeof="Item">
+                    <img class="icon" src="/static/assets/img/illustrations/undraw_investment_data_re_sh9x.svg"
+                        alt="Icon">
+                    <span property="text" aria-label="Text" class="">Business</span>
+                </summary>
+            </details>
+        </li>
+        <li class="nav-item">
+                <details  class="nav-link" id="Social-tab" data-bs-toggle="tab" data-bs-target="#Social-tab-pane" type="button"
+                role="tab" aria-controls="Social-tab-pane" aria-selected="false">
+                    <meta property="open" aria-label="Open" class="mv-empty" datatype="boolean">
+                    <summary property="title" typeof="Item">
+                        <img class="icon" src="/static/assets/img/illustrations/undraw_social_growth_re_tjy9.svg"
+                            alt="Icon">
+                        <span property="text" aria-label="Text" class="">Social Media & Ads</span>
+                    </summary>
+                </details>
+            </li>
+    </ul>
+
+
+
+
+
+<div class="tab-content" id="myTabContent">
+    {% for data in viewTool %}
+    {% if data == 'Content Writing' %}
+    <section class="section tab-pane fade show active" id="Content-tab-pane" role="tabpanel"
+        aria-labelledby="Content-tab" tabindex="0">
+       
+        <div class="container-fluid py-4 ">
+            <div class="row">
+               
+                {% for tool in viewTool[data] %}
+                
+                    <div class="mb-5 col-md-4 col-lg-3" style="height:280px">
+                        <a href="/tool?name={{tool}}">
+                        <div class="card data">
+                            
+                            <img class="card-icon" src="{{viewTool[data][tool]['img']}}" alt="monitoring">
+                            <h3 class="card-title">{{viewTool[data][tool]['titel']}}</h3>
+                            <p class="card-text">{{viewTool[data][tool]['dis']}}</p>
+                            <a class="card-link" href="/tool?name={{tool}}">Learn more</a>
+                         
+                        </div>
+                    </a>
+                    </div>
+               
+                {% endfor %}
+               
+
+            </div>
+        </div>
+        
+    </section>
+    {% elif data == 'WebCopySEO' %}
+    <section class="section tab-pane " id="WebCopy-tab-pane" role="tabpanel" aria-labelledby="WebCopy-tab" tabindex="0">
+        <div class="container-fluid py-4">
+            <div class="row">
+               
+                {% for tool in viewTool[data] %}
+                
+                    <div class="mb-5 col-md-4 col-lg-3" style="height:280px">
+                        <a href="/tool?name={{tool}}">
+                        <div class="card data">
+                            
+                            <img class="card-icon" src="{{viewTool[data][tool]['img']}}" alt="monitoring">
+                            <h3 class="card-title">{{viewTool[data][tool]['titel']}}</h3>
+                            <p class="card-text">{{viewTool[data][tool]['dis']}}</p>
+                             <a class="card-link" href="/tool?name={{tool}}">Learn more</a>
+                         
+                        </div>
+                    </a>
+                    </div>
+               
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+ 
+    {% elif data == 'SocialMediaAds' %}
+    <section class="section tab-pane fade" id="Social-tab-pane" role="tabpanel" aria-labelledby="Social-tab" tabindex="0">
+        <div class="container-fluid py-4">
+            <div class="row">
+                {% for tool in viewTool[data] %}
+                    <div class="mb-5 col-md-4 col-lg-3" style="height:280px">
+                        <a href="/tool?name={{tool}}">
+                        <div class="card data">
+                            
+                            <img class="card-icon" src="{{viewTool[data][tool]['img']}}" alt="monitoring">
+                            <h3 class="card-title">{{viewTool[data][tool]['titel']}}</h3>
+                            <p class="card-text">{{viewTool[data][tool]['dis']}}</p>
+                             <a class="card-link" href="/tool?name={{tool}}">Learn more</a>
+                         
+                        </div>
+                        </a>
+                    </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </section>
+
+
+    {% elif data == 'Marketing' %}
+    <section class="section tab-pane fade" id="Marketing-tab-pane" role="tabpanel" aria-labelledby="Marketing-tab" tabindex="0">
+        <div class="container-fluid py-4">
+            <div class="row">
+                {% for tool in viewTool[data] %}
+                
+                    <div class="mb-5 col-md-4 col-lg-3" style="height:280px">
+                        <a href="/tool?name={{tool}}">
+                        <div class="card data">
+                            
+                            <img class="card-icon" src="{{viewTool[data][tool]['img']}}" alt="monitoring">
+                            <h3 class="card-title">{{viewTool[data][tool]['titel']}}</h3>
+                            <p class="card-text">{{viewTool[data][tool]['dis']}}</p>
+                             <a class="card-link" href="/tool?name={{tool}}">Learn more</a>
+                         
+                        </div>
+                    </a>
+                    </div>
+               
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+
+{%endfor%}
+</div>
+<section class="section  py-0 banner-1" >
+    <div class="container z-2">
+        <div class="row position-relative justify-content-center align-items-cente">
+            <div class="col-12">
+      
+                <div class="card border-light px-4 py-1">
+                    <div class="card-body text-center text-md-left">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h2 class="h1 mb-3">Become one of the serves</h2>
+                                <p class="lead mb-4">
+                                    Before Purchading our services, you can experience them here
+                                </p>
+                                <a href="#" class="btn btn-primary">
+                                    <span class="me-1">
+                                        <span class="fas fa-file-invoice"></span>
+                                    </span>
+                                    Check Now
+                                </a>
+                            </div>
+                            <div class="col-12 col-md-6 mt-5 mt-md-0 text-md-right">
+                                <img src="/static/assets/img/illustrations/reading-side.svg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </section>
+
+{% include 'includes/footer-about.html' %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
